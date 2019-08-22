@@ -7,7 +7,7 @@ usage () {
 
 main () {
     # Check for the right number of arguments.
-    if [ $# -ne 1 ]; then
+    if (( $# != 1 )); then
         usage
     fi
     echo "Hello, $1"

@@ -12,7 +12,7 @@ main () {
     local isLeap="false"
 
     # Input checks
-    if [ $# -ne "$ARGS" ]; then
+    if (( $# != ARGS )); then
         usage
     fi
     case ${year} in
@@ -21,11 +21,7 @@ main () {
             ;;
     esac
 
-    local remainder4=$(( year % 4 ))
-    local remainder100=$(( year % 100 ))
-    local remainder400=$(( year % 400 ))
-
-    if { [ ${remainder4} -eq 0 ] && [ ${remainder100} -ne 0 ]; } || [ ${remainder400} -eq 0 ]; then
+    if (( year % 4 == 0 && year % 100 != 0)) || (( year % 400 == 0 )); then
         isLeap="true"
     fi
 
