@@ -15,9 +15,7 @@ class Matrix():
                 The items are assumed to be integers encoded
                 in the string.
         """
-        self.matrix = []
-        for row in matrix_string.split('\n'):
-            self.matrix.append([int(n) for n in row.split(' ')])
+        self.matrix = [[int(n) for n in row.split()] for row in matrix_string.splitlines()]
 
     def row(self, index):
         """
@@ -29,7 +27,7 @@ class Matrix():
         Returns:
             List of items as integers in the given row.
         """
-        return self.matrix[index-1]
+        return self.matrix[index-1].copy()
 
     def column(self, index):
         """
@@ -41,4 +39,4 @@ class Matrix():
         Returns:
             List of items as integers in the given column.
         """
-        return [self.matrix[i][index - 1] for i in range(len(self.matrix))]
+        return [row[index - 1] for row in self.matrix]
