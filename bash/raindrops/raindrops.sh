@@ -4,13 +4,13 @@ main () {
     local number=$1
     local drops=""
     if ((number % 3 == 0)); then
-        drops="${drops}Pling"
+        drops+="Pling"
     fi
     if ((number % 5 == 0)); then
-        drops="${drops}Plang"
+        drops+="Plang"
     fi
     if ((number % 7 == 0)); then
-        drops="${drops}Plong"
+        drops+="Plong"
     fi
     echo "${drops:=${number}}"
 }
