@@ -5,8 +5,8 @@ main () {
     local outString=""
     local letter
     while (( ${#inString} > 0 )); do
-        letter="${inString:${#inString}-1:1}"
-        outString="${outString}${letter}"
+        letter="${inString: -1}"
+        outString+="${letter}"
         inString="${inString%${letter}}"
     done
     echo "$outString"
