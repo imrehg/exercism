@@ -7,11 +7,12 @@
  */
 export const value = colorBands => {
   let totalResistorValue = 0;
-  for (let colorIndex = 0; colorIndex < colorBands.length; colorIndex++) {
+  let band;
+  for (band of colorBands) {
     // Shift order of magnitude by each band processed
     totalResistorValue *= 10;
     // Calculate value of current band
-    totalResistorValue += colorCode(colorBands[colorIndex]);
+    totalResistorValue += colorCode(band);
   }
   return totalResistorValue;
 };
@@ -25,7 +26,7 @@ export const value = colorBands => {
  */
 export const colorCode = color => {
   let resistorValue = COLORS.indexOf(color);
-  if (resistorValue < 0) {
+  if (resistorValue === -1) {
     throw new Error(`Unknown resistor color: ${color}`);
   }
   return resistorValue;
