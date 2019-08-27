@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-ARGS=1
+# The required arguments count
+readonly ARGS=1
 
 usage () {
     echo "Usage: leap.sh <year>"
