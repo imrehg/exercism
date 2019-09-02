@@ -24,16 +24,15 @@ usage () {
 hamming () {
     local left=$1
     local right=$2
+    local iterator=0
     local distance=0
 
-    while ((${#left} > 0)); do
+    while (( iterator < ${#left} )); do
         # Compare the first characters
-        if [[ "${left:0:1}" != "${right:0:1}" ]]; then
+        if [[ "${left:$iterator:1}" != "${right:$iterator:1}" ]]; then
             (( distance++ ))
         fi
-        # Remove the first characters before next loop
-        left=${left:1}
-        right=${right:1}
+        (( iterator++ ))
     done
     echo "${distance}"
 }
