@@ -6,15 +6,10 @@
  * @throws Will throw an error if any of the color codes are unknown (through colorCode)
  */
 export const value = colorBands => {
-  let totalResistorValue = 0;
-  let band;
-  for (band of colorBands) {
-    // Shift order of magnitude by each band processed
-    totalResistorValue *= 10;
-    // Calculate value of current band
-    totalResistorValue += colorCode(band);
-  }
-  return totalResistorValue;
+  return colorBands
+    .reverse()
+    .map((band, index) => colorCode(band) * 10 ** index)
+    .reduce((a, b) => a + b, 0);
 };
 
 /**
