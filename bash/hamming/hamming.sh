@@ -24,15 +24,13 @@ usage () {
 hamming () {
     local left=$1
     local right=$2
-    local iterator=0
-    local distance=0
-
-    while (( iterator < ${#left} )); do
-        # Compare the first characters
+    local -i iterator
+    local -i distance=0
+    for (( iterator = 0; iterator < ${#left}; iterator++ )); do
+        # Compare individual characters
         if [[ "${left:$iterator:1}" != "${right:$iterator:1}" ]]; then
-            (( distance++ ))
+            distance+=1
         fi
-        (( iterator++ ))
     done
     echo "${distance}"
 }
