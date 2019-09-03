@@ -1,3 +1,4 @@
+// Provide the `graphemes` method for unicode cases
 use unicode_segmentation::UnicodeSegmentation;
 
 /// Reverses a string
