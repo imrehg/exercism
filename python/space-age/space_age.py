@@ -18,21 +18,20 @@ class SpaceAge:
     def __init__(self, seconds):
         self._seconds = seconds
         for planet in YEAR_LENGTH:
-            _method = self.__make_method(planet)
-            _method.__doc__ = f'Get age on {planet.capitalize()}'
-            setattr(self, f'on_{planet}', _method)
+            setattr(self, f'on_{planet}', self.__age_on_planet(planet))
 
     @property
     def seconds(self):
         """The age in original seconds."""
         return self._seconds
 
-    def __make_method(self, planet):
-        """Generate the 'on_<planet>' method"""
-        def _method():
-            return self.__age_on_planet(planet)
-        return _method
-
     def __age_on_planet(self, planet):
-        """Calculate the age on a specific planet."""
-        return round(self.seconds / YEAR_LENGTH[planet], 2)
+        """Method generation to calculate the age on a specific planet.
+
+        Args:
+            planet: the planet's name
+
+        Return:
+            function to return age on that particular planet
+        """
+        return lambda: round(self.seconds / YEAR_LENGTH[planet], 2)
