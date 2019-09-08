@@ -2,42 +2,43 @@
 import math
 import random
 
+ABILITIES = ['strength',
+             'dexterity',
+             'constitution',
+             'intelligence',
+             'wisdom',
+             'charisma']
+
 class Character:
     """DnD character generator"""
     # List of abilities a character can have
-    abilities = ['strength',
-                 'dexterity',
-                 'constitution',
-                 'intelligence',
-                 'wisdom',
-                 'charisma']
     def __init__(self, character_seed=None):
         self.__random_generator = random.Random(character_seed)
-        for ability in self.abilities:
-            self.__dict__[ability] = self.__generate_ability()
+        for ability in ABILITIES:
+            setattr(self, ability, self.ability())
         self.hitpoints = 10 + modifier(self.constitution)
 
     def __dice(self, sides=6):
-        return self.__random_generator.randint(1, sides)
-
-    def __generate_ability(self):
-        return sum(sorted([self.__dice() for i in range(4)], reverse=True)[:3])
-
-    def ability(self, ability_name=None):
-        """Get a character ability.
-        [Aside: this function's role is not clear from the test file, thus
-        some assumptions were made]
+        """A dice
 
         Args:
-            ability_name: the name of ability to get (optional)
+            sides: number of sides, default to good ol' regular 6-sides
+
+        Returns:
+            one dice roll value
+        """
+        return self.__random_generator.randint(1, sides)
+
+    def ability(self):
+        """Generate a character ability.
+
+        Args:
+            None
 
         Return:
-            the ability value if name was provided, or the value of a random
-            ability if not
+            an ability value according to the dice rules
         """
-        if not ability_name:
-            ability_name = random.choice(self.abilities)
-        return self.__dict__[ability_name]
+        return sum(sorted([self.__dice() for _ in range(4)], reverse=True)[:3])
 
 def modifier(ability_value):
     """Calculate a modifier from an ability's value (mainly used for Constitution)
