@@ -32,7 +32,7 @@ def score(dice, category):
     elif category in [ONES, TWOS, THREES, FOURS, FIVES, SIXES]:
         dice_score = category * counts[category]
     elif category == FULL_HOUSE:
-        dice_score = sum(dice) if len(most_common) == 2 and most_common[0][1] == 3 else 0
+        dice_score = sum(dice) if sorted(counts.values()) == [2, 3] else 0
     elif category == FOUR_OF_A_KIND:
         dice_score = 4 * most_common[0][0] if most_common[0][1] in [4, 5] else 0
     elif category == LITTLE_STRAIGHT:
