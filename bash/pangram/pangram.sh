@@ -13,17 +13,16 @@ LETTERS="abcdefghijklmnopqrstuvwxyz"
 main () {
     # Get input variable and convert to lowercase
     local candidate=${1,,}
-    local is_pangram="true"
     local -i iterator
     for (( iterator=0; iterator < ${#LETTERS}; iterator++ )); do
         if [[ $candidate != *"${LETTERS:iterator:1}"* ]]; then
             # As soon as there's a letter that we couldn't find in the input,
             # the we can bail
-            is_pangram="false"
-            break
+            echo "false"
+            return
         fi
     done
-    echo "${is_pangram}"
+    echo "true"
 }
 
 main "$@"
