@@ -11,7 +11,7 @@ main () {
     # Get input variable and convert to lowercase
     local candidate=${1,,}
     for letter in {a..z}; do
-        if [[ $candidate != *${letter}* ]]; then
+        if [[ ${candidate} != *${letter}* ]]; then
             # As soon as there's a letter that we couldn't find in the input,
             # the we can bail
             echo "false"
