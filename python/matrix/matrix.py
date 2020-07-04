@@ -1,6 +1,7 @@
 """Storing and processing a matrix of numbers"""
 
-class Matrix():
+
+class Matrix:
     """
     Matrix contains a matrix of integers
     """
@@ -15,7 +16,9 @@ class Matrix():
                 The items are assumed to be integers encoded
                 in the string.
         """
-        self.matrix = [[int(n) for n in row.split()] for row in matrix_string.splitlines()]
+        self.matrix = [
+            [int(n) for n in row.split()] for row in matrix_string.splitlines()
+        ]
 
     def row(self, index):
         """
@@ -27,7 +30,7 @@ class Matrix():
         Returns:
             List of items as integers in the given row.
         """
-        return self.matrix[index-1].copy()
+        return self.matrix[index - 1].copy()
 
     def column(self, index):
         """
