@@ -1,13 +1,18 @@
+import scala.annotation.tailrec
+
 object CollatzConjecture {
   def steps(
-      starting_n: Int,
-      steps_already: Int = 0
+      starting_n: Int
   ): Option[Int] = {
-    starting_n match {
-      case 1               => Some(steps_already)
-      case x if x < 1      => None
-      case x if x % 2 == 0 => steps(x / 2, steps_already + 1)
-      case _               => steps(3 * starting_n + 1, steps_already + 1)
+    @tailrec def iter(n: Int, steps: Int): Int = {
+      n match {
+        case 1               => steps
+        case x if x % 2 == 0 => iter(x / 2, steps + 1)
+        case _               => iter(3 * n + 1, steps + 1)
+      }
     }
+
+    if (starting_n > 0) Some(iter(starting_n, 0))
+    else None
   }
 }
