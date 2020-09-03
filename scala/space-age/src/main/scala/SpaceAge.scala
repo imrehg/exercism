@@ -1,8 +1,10 @@
 object SpaceAge {
   val EarthYear = 31557600
 
-  private[this] def onPlanet = true
-  def onPlanet(seconds: Double, yearLengthInSeconds: Double): Double =
+  private[this] def onPlanet(
+      seconds: Double,
+      yearLengthInSeconds: Double
+  ): Double =
     seconds / yearLengthInSeconds;
 
   def onMercury(seconds: Double): Double =
