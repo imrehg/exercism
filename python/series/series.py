@@ -1,6 +1,8 @@
 """Slicing strings"""
+from typing import List
 
-def slices(series, length):
+
+def slices(series: str, slice_length: int) -> List[str]:
     """Slice up a string and give all the overlapping sequences
     of a given length
 
@@ -11,7 +13,22 @@ def slices(series, length):
     Returns:
         An list of all possible string slices of the provided length
     """
-    num_slices = len(series) - length + 1
-    if length < 1 or num_slices < 1:
+    # Sanity check the slice information
+    if slice_length < 0:
+        raise ValueError("slice length cannot be negative")
+    if slice_length == 0:
+        raise ValueError("slice length cannot be zero")
+
+    series_length = len(series)
+
+    # Sanity check the series information
+    if series_length == 0:
+        raise ValueError("series cannot be empty")
+    if series_length < slice_length:
+        raise ValueError("slice length cannot be greater than series length")
+
+    num_slices = len(series) - slice_length + 1
+    if slice_length < 1 or num_slices < 1:
         raise ValueError("Incorrect `length` supplied, needs to be 0 < length <= length of series ")
-    return [series[i:i+length] for i in range(0, num_slices)]
+
+    return [series[i : i + slice_length] for i in range(0, num_slices)]
