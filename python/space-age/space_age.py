@@ -1,4 +1,5 @@
 """Space age calculation, your age on different planets"""
+from typing import Callable
 
 EARTH_YEAR = 31557600
 YEAR_LENGTH = {
@@ -12,24 +13,25 @@ YEAR_LENGTH = {
     "neptune": EARTH_YEAR * 164.79132,
 }
 
+
 class SpaceAge:
     """Space age calculation on different planets"""
 
-    def __init__(self, seconds):
+    def __init__(self, seconds: int):
         self._seconds = seconds
         for planet in YEAR_LENGTH:
-            setattr(self, f'on_{planet}', self.__age_on_planet(planet))
+            setattr(self, f"on_{planet}", self.__age_on_planet(planet))
 
     @property
-    def seconds(self):
+    def seconds(self) -> int:
         """The age in original seconds."""
         return self._seconds
 
-    def __age_on_planet(self, planet):
+    def __age_on_planet(self, planet: str) -> Callable[[], float]:
         """Method generation to calculate the age on a specific planet.
 
         Args:
-            planet: the planet's name
+            planet: str: the planet's name
 
         Return:
             function to return age on that particular planet
