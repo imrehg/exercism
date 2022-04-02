@@ -15,6 +15,7 @@ LITTLE_STRAIGHT = 9
 BIG_STRAIGHT = 10
 CHOICE = 11
 
+
 def score(dice, category):
     """Calculate score according to the Yacht rules
 
