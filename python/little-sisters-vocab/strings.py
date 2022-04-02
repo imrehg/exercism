@@ -1,4 +1,8 @@
-def add_prefix_un(word):
+import re
+from typing import List
+
+
+def add_prefix_un(word: str) -> str:
     """
 
     :param word: str of a root word
@@ -7,11 +11,10 @@ def add_prefix_un(word):
     This function takes `word` as a parameter and
     returns a new word with an 'un' prefix.
     """
+    return "un" + word
 
-    pass
 
-
-def make_word_groups(vocab_words):
+def make_word_groups(vocab_words: List[str]) -> str:
     """
 
     :param vocab_words: list of vocabulary words with a prefix.
@@ -22,11 +25,11 @@ def make_word_groups(vocab_words):
     with the prefix  and the words with prefix applied, separated
      by ' :: '.
     """
+    prefix = vocab_words[0]
+    return " :: ".join([prefix] + [prefix + word for word in vocab_words[1:]])
 
-    pass
 
-
-def remove_suffix_ness(word):
+def remove_suffix_ness(word: str) -> str:
     """
 
     :param word: str of word to remove suffix from.
@@ -34,11 +37,13 @@ def remove_suffix_ness(word):
 
     This function takes in a word and returns the base word with `ness` removed.
     """
+    trimmed = word.removesuffix("ness")
+    if trimmed.endswith("i"):
+        trimmed = trimmed[:-1] + "y"
+    return trimmed
 
-    pass
 
-
-def adjective_to_verb(sentence, index):
+def adjective_to_verb(sentence: str, index: int):
     """
 
     :param sentence: str that uses the word in sentence
@@ -50,5 +55,6 @@ def adjective_to_verb(sentence, index):
     is split apart.  The function should return the extracted
     adjective as a verb.
     """
-
-    pass
+    words = sentence.split()
+    word = re.sub(r"[^a-zA-Z0-9]", "", words[index])
+    return word + "en"
