@@ -1,27 +1,30 @@
 """Protein transcription from RNA sequences"""
 from itertools import takewhile
+from typing import List, Dict
 
 # Known protein translations
-PROTEINS = {
-    'AUG': 'Methionine',
-    'UUU': 'Phenylalanine',
-    'UUC': 'Phenylalanine',
-    'UUA': 'Leucine',
-    'UUG': 'Leucine',
-    'UCU': 'Serine',
-    'UCC': 'Serine',
-    'UCA': 'Serine',
-    'UCG': 'Serine',
-    'UAU': 'Tyrosine',
-    'UAC': 'Tyrosine',
-    'UGU': 'Cysteine',
-    'UGC': 'Cysteine',
-    'UGG': 'Tryptophan',
-    'UAA': 'STOP', # stop signal for translation
-    'UAG': 'STOP', # stop signal for translation
-    'UGA': 'STOP', # stop signal for translation
+PROTEINS: Dict[str, str] = {
+    "AUG": "Methionine",
+    "UUU": "Phenylalanine",
+    "UUC": "Phenylalanine",
+    "UUA": "Leucine",
+    "UUG": "Leucine",
+    "UCU": "Serine",
+    "UCC": "Serine",
+    "UCA": "Serine",
+    "UCG": "Serine",
+    "UAU": "Tyrosine",
+    "UAC": "Tyrosine",
+    "UGU": "Cysteine",
+    "UGC": "Cysteine",
+    "UGG": "Tryptophan",
+    "UAA": "STOP",  # stop signal for translation
+    "UAG": "STOP",  # stop signal for translation
+    "UGA": "STOP",  # stop signal for translation
 }
-def proteins(strand):
+
+
+def proteins(strand: str) -> List[str]:
     """Protein translation from RNA sequence
 
     Args:
@@ -30,4 +33,6 @@ def proteins(strand):
     Return:
         the list of proteins transscribed
     """
-    return [p for p in takewhile(lambda x: x != 'STOP', [PROTEINS[strand[i:i+3]] for i in range(0, len(strand), 3)])]
+    return [
+        p for p in takewhile(lambda x: x != "STOP", [PROTEINS[strand[i : i + 3]] for i in range(0, len(strand), 3)])
+    ]
