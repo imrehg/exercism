@@ -1,7 +1,10 @@
 """ Meltdown Mitigation exercise """
 
 
-def is_criticality_balanced(temperature, neutrons_emitted):
+from typing import Union
+
+
+def is_criticality_balanced(temperature: Union[int, float], neutrons_emitted: Union[int, float]) -> bool:
     """Verify criticality is balanced.
 
     :param temperature: temperature value in kelvin (integer or float)
@@ -13,11 +16,12 @@ def is_criticality_balanced(temperature, neutrons_emitted):
     - The number of neutrons emitted per second is greater than 500.
     - The product of temperature and neutrons emitted per second is less than 500000.
     """
+    return temperature < 800 and neutrons_emitted > 500 and temperature * neutrons_emitted < 500000
 
-    pass
 
-
-def reactor_efficiency(voltage, current, theoretical_max_power):
+def reactor_efficiency(
+    voltage: Union[int, float], current: Union[int, float], theoretical_max_power: Union[int, float]
+) -> str:
     """Assess reactor efficiency zone.
 
     :param voltage: voltage value (integer or float)
@@ -36,11 +40,20 @@ def reactor_efficiency(voltage, current, theoretical_max_power):
     (generated power/ theoretical max power)*100
     where generated power = voltage * current
     """
+    efficiency = ((voltage * current) / theoretical_max_power) * 100
+    if efficiency >= 80:
+        return "green"
+    elif efficiency >= 60:
+        return "orange"
+    elif efficiency >= 30:
+        return "red"
+    else:
+        return "black"
 
-    pass
 
-
-def fail_safe(temperature, neutrons_produced_per_second, threshold):
+def fail_safe(
+    temperature: Union[int, float], neutrons_produced_per_second: Union[int, float], threshold: Union[int, float]
+) -> str:
     """Assess and return status code for the reactor.
 
     :param temperature: value of the temperature in kelvin (integer or float)
@@ -52,5 +65,10 @@ def fail_safe(temperature, neutrons_produced_per_second, threshold):
     - `temperature * neutrons per second` +/- 10% of `threshold` == 'NORMAL'
     - `temperature * neutrons per second` is not in the above-stated ranges ==  'DANGER'
     """
-
-    pass
+    criticality_measure = temperature * neutrons_produced_per_second / threshold
+    if criticality_measure < 0.9:
+        return "LOW"
+    elif 0.9 <= criticality_measure <= 1.1:
+        return "NORMAL"
+    else:
+        return "DANGER"
