@@ -2,18 +2,15 @@
 
 import threading
 
-class BankAccount():
+
+class BankAccount:
     """Bank account implementation with balance tracking
     and manipulation, as well as other required services.
     Threadsafe.
     """
 
     def __init__(self):
-        """Create a bank account.
-
-        Args:
-            None
-        """
+        """Create a bank account."""
         # The account starts out closed
         self.balance = 0
         self.is_open = False
@@ -55,7 +52,7 @@ class BankAccount():
             self.balance = 0
             self.is_open = True
 
-    def get_balance(self):
+    def get_balance(self) -> int:
         """Get the current balance of the account
 
         Args:
@@ -72,7 +69,7 @@ class BankAccount():
             self.__check_account_state()
             return self.balance
 
-    def deposit(self, amount):
+    def deposit(self, amount: int):
         """Deposit an amount into the account
 
         Args:
@@ -90,10 +87,10 @@ class BankAccount():
             self.__check_account_state()
             # Input checks
             if amount < 0:
-                raise ValueError(f'Cannot deposit negative amount: {amount}.')
+                raise ValueError(f"Cannot deposit negative amount: {amount}.")
             self.balance += amount
 
-    def withdraw(self, amount):
+    def withdraw(self, amount: int):
         """Withdraw an amount from the account
 
         Args:
@@ -112,7 +109,7 @@ class BankAccount():
             self.__check_account_state()
             # Input checks
             if amount < 0:
-                raise ValueError(f'Cannot withdraw negative amount: {amount}.')
+                raise ValueError(f"Cannot withdraw negative amount: {amount}.")
             if self.balance < amount:
                 raise ValueError("Cannot withdraw more than balance.")
             self.balance -= amount
