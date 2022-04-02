@@ -3,9 +3,8 @@
 import math
 
 """Darts circle radii and score settings"""
-DARTS_RADIUS_SCORE = [{'radius': 1, 'score': 10},
-                      {'radius': 5, 'score': 5},
-                      {'radius': 10, 'score': 1}]
+DARTS_RADIUS_SCORE = [{"radius": 1, "score": 10}, {"radius": 5, "score": 5}, {"radius": 10, "score": 1}]
+
 
 def score(x, y):
     """
@@ -21,10 +20,9 @@ def score(x, y):
     Return:
         Score relevant to the circle being hit
     """
-    distance = math.sqrt(x*x + y*y)
-    thrower_score = 0
+    distance = math.sqrt(x * x + y * y)
     for circle in DARTS_RADIUS_SCORE:
-        if distance <= circle['radius']:
-            thrower_score = circle['score']
-            break
-    return thrower_score
+        if distance <= circle["radius"]:
+            return circle["score"]
+    # We've missed
+    return 0
