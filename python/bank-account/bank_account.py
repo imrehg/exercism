@@ -17,7 +17,7 @@ class BankAccount:
         # Account-global lock to allow threadsafe processing
         self._lock = threading.Lock()
 
-    def __check_account_state(self, required_open=True):
+    def __check_account_state(self, required_open: bool = True):
         """Checks if the account's state is as requested.
 
         Args:
