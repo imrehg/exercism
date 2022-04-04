@@ -30,8 +30,10 @@ class BankAccount:
         Returns:
             None
         """
-        if self.is_open != required_open:
-            raise ValueError("Account action is not permitted in its current state.")
+        if (not self.is_open) and required_open:
+            raise ValueError("account not open")
+        elif self.is_open and (not required_open):
+            raise ValueError("account already open")
 
     def open(self):
         """Opens or reopens the account and resets balance.
@@ -87,7 +89,7 @@ class BankAccount:
             self.__check_account_state()
             # Input checks
             if amount < 0:
-                raise ValueError(f"Cannot deposit negative amount: {amount}.")
+                raise ValueError("amount must be greater than 0")
             self.balance += amount
 
     def withdraw(self, amount: int):
@@ -109,9 +111,9 @@ class BankAccount:
             self.__check_account_state()
             # Input checks
             if amount < 0:
-                raise ValueError(f"Cannot withdraw negative amount: {amount}.")
+                raise ValueError("amount must be greater than 0")
             if self.balance < amount:
-                raise ValueError("Cannot withdraw more than balance.")
+                raise ValueError("amount must be less than balance")
             self.balance -= amount
 
     def close(self):
