@@ -12,11 +12,13 @@ def value_of_card(card: str) -> int:
     :param card: str - given card.
     :return: int - value of a given card. 'J', 'Q', 'K' = 10; 'A' = 1; numerical value otherwise.
     """
-    if card in ["J", "Q", "K"]:
+    if card in {"J", "Q", "K"}:
         return 10
     if card == "A":
         return 1
     return int(card)
+    # Alternative suggestion that is optimized to be a one-liner
+    # return int({"A": 1, "K": 10, "Q": 10, "J": 10}.get(card, card))
 
 
 def higher_card(card_one: str, card_two: str) -> Union[str, tuple[str, str]]:
@@ -29,7 +31,7 @@ def higher_card(card_one: str, card_two: str) -> Union[str, tuple[str, str]]:
 
     if card_one_value > card_two_value:
         return card_one
-    elif card_one_value < card_two_value:
+    if card_two_value > card_one_value:
         return card_two
     return (card_one, card_two)
 
