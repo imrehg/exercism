@@ -2,7 +2,8 @@
 import random
 import string
 
-class Robot():
+
+class Robot:
     """A robot that has a name"""
 
     def __init__(self, name_seed=None):
@@ -14,7 +15,8 @@ class Robot():
         self.__random_generator = random.Random(name_seed)
         self.reset()
 
-    def name(self):
+    @property
+    def name(self) -> str:
         """Query the name of the robot
 
         Args:
@@ -35,5 +37,7 @@ class Robot():
         Returns:
             None
         """
-        self.__name = "".join(self.__random_generator.choices(string.ascii_uppercase, k=2) +
-                              self.__random_generator.choices(string.digits, k=3))
+        self.__name = "".join(
+            self.__random_generator.choices(string.ascii_uppercase, k=2)
+            + self.__random_generator.choices(string.digits, k=3)
+        )
