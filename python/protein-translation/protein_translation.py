@@ -1,9 +1,8 @@
 """Protein transcription from RNA sequences"""
 from itertools import takewhile
-from typing import List, Dict
 
 # Known protein translations
-PROTEINS: Dict[str, str] = {
+PROTEINS: dict[str, str] = {
     "AUG": "Methionine",
     "UUU": "Phenylalanine",
     "UUC": "Phenylalanine",
@@ -24,8 +23,8 @@ PROTEINS: Dict[str, str] = {
 }
 
 
-def proteins(strand: str) -> List[str]:
-    """Protein translation from RNA sequence
+def proteins(strand: str) -> list[str]:
+    """Translate proteins from an RNA sequence.
 
     Args:
         strand: string of RNA sequence
