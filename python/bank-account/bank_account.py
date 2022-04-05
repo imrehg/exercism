@@ -48,7 +48,6 @@ class BankAccount:
             None
         """
         with self._lock:
-            # Account check
             self.__check_account_state(required_open=False)
             # Reset account state to the basics
             self.balance = 0
@@ -67,7 +66,6 @@ class BankAccount:
             The account balance value.
         """
         with self._lock:
-            # Account check
             self.__check_account_state()
             return self.balance
 
@@ -87,9 +85,7 @@ class BankAccount:
         if amount < 0:
             raise ValueError("amount must be greater than 0")
         with self._lock:
-            # Account check
             self.__check_account_state()
-            # Input checks
             self.balance += amount
 
     def withdraw(self, amount: int) -> None:
@@ -109,9 +105,7 @@ class BankAccount:
         if amount < 0:
             raise ValueError("amount must be greater than 0")
         with self._lock:
-            # Account check
             self.__check_account_state()
-            # Input checks
             if self.balance < amount:
                 raise ValueError("amount must be less than balance")
             self.balance -= amount
