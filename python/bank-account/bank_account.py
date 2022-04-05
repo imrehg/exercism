@@ -4,12 +4,12 @@ import threading
 
 
 class BankAccount:
-    """Bank account implementation with balance tracking
-    and manipulation, as well as other required services.
-    Threadsafe.
+    """Bank account implementation.
+
+    Balance tracking and manipulation. Threadsafe.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create a bank account."""
         # The account starts out closed
         self.balance = 0
@@ -17,8 +17,8 @@ class BankAccount:
         # Account-global lock to allow threadsafe processing
         self._lock = threading.Lock()
 
-    def __check_account_state(self, required_open: bool = True):
-        """Checks if the account's state is as requested.
+    def __check_account_state(self, required_open: bool = True) -> None:
+        """Check if the account's state is as requested.
 
         Args:
             required_open: toggle whether to check if the account is open (True/default),
@@ -35,8 +35,8 @@ class BankAccount:
         elif self.is_open and (not required_open):
             raise ValueError("account already open")
 
-    def open(self):
-        """Opens or reopens the account and resets balance.
+    def open(self) -> None:
+        """Open or reopen the account and resets balance.
 
         Args:
             None
@@ -55,7 +55,7 @@ class BankAccount:
             self.is_open = True
 
     def get_balance(self) -> int:
-        """Get the current balance of the account
+        """Query the current balance of the account.
 
         Args:
             None
@@ -71,8 +71,8 @@ class BankAccount:
             self.__check_account_state()
             return self.balance
 
-    def deposit(self, amount: int):
-        """Deposit an amount into the account
+    def deposit(self, amount: int) -> None:
+        """Deposit an amount into the account.
 
         Args:
             amount: the amount to deposit
@@ -84,16 +84,16 @@ class BankAccount:
         Returns:
             None
         """
+        if amount < 0:
+            raise ValueError("amount must be greater than 0")
         with self._lock:
             # Account check
             self.__check_account_state()
             # Input checks
-            if amount < 0:
-                raise ValueError("amount must be greater than 0")
             self.balance += amount
 
-    def withdraw(self, amount: int):
-        """Withdraw an amount from the account
+    def withdraw(self, amount: int) -> None:
+        """Withdraw an amount from the account.
 
         Args:
             amount: the amount to withdraw
@@ -106,18 +106,18 @@ class BankAccount:
         Returns:
             None
         """
+        if amount < 0:
+            raise ValueError("amount must be greater than 0")
         with self._lock:
             # Account check
             self.__check_account_state()
             # Input checks
-            if amount < 0:
-                raise ValueError("amount must be greater than 0")
             if self.balance < amount:
                 raise ValueError("amount must be less than balance")
             self.balance -= amount
 
     def close(self):
-        """Close the given account
+        """Close the given account.
 
         Args:
             None
