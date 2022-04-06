@@ -1,5 +1,5 @@
 """Protein transcription from RNA sequences"""
-from itertools import takewhile
+# from itertools import takewhile
 
 # Known protein translations
 PROTEINS: dict[str, str] = {
@@ -32,9 +32,22 @@ def proteins(strand: str) -> list[str]:
     Return:
         the list of proteins transscribed
     """
-    return list(
-        takewhile(
-            lambda x: x != "STOP",
-            (PROTEINS[strand[i : i + 3]] for i in range(0, len(strand), 3)),
-        )
-    )
+    # Compact solution
+    # return list(
+    #     takewhile(
+    #         lambda x: x != "STOP",
+    #         (PROTEINS[strand[i : i + 3]] for i in range(0, len(strand), 3)),
+    #     )
+    # )
+
+    # Basic solution
+    trasscribed = []
+    for i in range(0, len(strand), 3):
+        candidate = PROTEINS[strand[i : i + 3]]
+
+        if candidate == "STOP":
+            break
+
+        trasscribed += [candidate]
+
+    return trasscribed
