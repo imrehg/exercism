@@ -32,10 +32,9 @@ def proteins(strand: str) -> list[str]:
     Return:
         the list of proteins transscribed
     """
-    return [
-        p
-        for p in takewhile(
+    return list(
+        takewhile(
             lambda x: x != "STOP",
-            [PROTEINS[strand[i : i + 3]] for i in range(0, len(strand), 3)],
+            (PROTEINS[strand[i : i + 3]] for i in range(0, len(strand), 3)),
         )
-    ]
+    )
