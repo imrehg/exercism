@@ -16,7 +16,7 @@ BIG_STRAIGHT = 10
 CHOICE = 11
 
 
-def score(dice, category):
+def score(dice: list[int], category: int) -> int:
     """Calculate score according to the Yacht rules
 
     Args:
@@ -27,15 +27,16 @@ def score(dice, category):
         the integer score
     """
     counts = Counter(dice)
-    most_common = counts.most_common()
+    most_common_value, most_common_count = counts.most_common()[0]
+
     if category == YACHT:
-        dice_score = 50 if most_common[0][1] == 5 else 0
-    elif category in [ONES, TWOS, THREES, FOURS, FIVES, SIXES]:
+        dice_score = 50 if most_common_count == 5 else 0
+    elif category in {ONES, TWOS, THREES, FOURS, FIVES, SIXES}:
         dice_score = category * counts[category]
     elif category == FULL_HOUSE:
         dice_score = sum(dice) if sorted(counts.values()) == [2, 3] else 0
     elif category == FOUR_OF_A_KIND:
-        dice_score = 4 * most_common[0][0] if most_common[0][1] in [4, 5] else 0
+        dice_score = 4 * most_common_value if most_common_count in {4, 5} else 0
     elif category == LITTLE_STRAIGHT:
         dice_score = 30 if sorted(dice) == [1, 2, 3, 4, 5] else 0
     elif category == BIG_STRAIGHT:
