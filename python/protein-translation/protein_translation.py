@@ -41,13 +41,13 @@ def proteins(strand: str) -> list[str]:
     # )
 
     # Basic solution
-    trasscribed = []
+    trascribed = []
     for i in range(0, len(strand), 3):
         candidate = PROTEINS[strand[i : i + 3]]
 
         if candidate == "STOP":
             break
 
-        trasscribed += [candidate]
+        trascribed.append(candidate)
 
-    return trasscribed
+    return trascribed
