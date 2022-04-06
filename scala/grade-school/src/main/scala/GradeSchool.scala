@@ -13,8 +13,7 @@ class School {
   def db: DB = _db
 
   def grade(g: Int): Seq[String] =
-    if (_db contains g) _db(g)
-    else Seq()
+    _db.getOrElse(g, Seq())
 
   def sorted: DB = SortedMap(_db.toSeq: _*) map { case (k, v) => k -> v.sorted }
 }
