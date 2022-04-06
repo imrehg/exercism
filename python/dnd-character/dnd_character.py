@@ -2,24 +2,22 @@
 import math
 import random
 
-ABILITIES = ['strength',
-             'dexterity',
-             'constitution',
-             'intelligence',
-             'wisdom',
-             'charisma']
 
 class Character:
     """DnD character generator"""
-    # List of abilities a character can have
-    def __init__(self, character_seed=None):
+
+    def __init__(self, character_seed=None) -> None:
         self.__random_generator = random.Random(character_seed)
-        for ability in ABILITIES:
-            setattr(self, ability, self.ability())
+        self.strength = self.ability()
+        self.dexterity = self.ability()
+        self.constitution = self.ability()
+        self.intelligence = self.ability()
+        self.wisdom = self.ability()
+        self.charisma = self.ability()
         self.hitpoints = 10 + modifier(self.constitution)
 
-    def __dice(self, sides=6):
-        """A dice
+    def __dice(self, sides: int = 6) -> int:
+        """Roll a dice
 
         Args:
             sides: number of sides, default to good ol' regular 6-sides
@@ -29,7 +27,7 @@ class Character:
         """
         return self.__random_generator.randint(1, sides)
 
-    def ability(self):
+    def ability(self) -> int:
         """Generate a character ability.
 
         Args:
@@ -40,7 +38,8 @@ class Character:
         """
         return sum(sorted([self.__dice() for _ in range(4)], reverse=True)[:3])
 
-def modifier(ability_value):
+
+def modifier(ability_value: int) -> int:
     """Calculate a modifier from an ability's value (mainly used for Constitution)
 
     Args:
