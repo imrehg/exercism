@@ -1,5 +1,5 @@
-import unittest
 import random
+import unittest
 
 from robot_name import Robot
 
@@ -10,7 +10,7 @@ class RobotNameTest(unittest.TestCase):
     if not hasattr(unittest.TestCase, "assertRegex"):
         assertRegex = unittest.TestCase.assertRegexpMatches
 
-    name_re = r'^[A-Z]{2}\d{3}$'
+    name_re = r"^[A-Z]{2}\d{3}$"
 
     def test_has_name(self):
         self.assertRegex(Robot().name, self.name_re)
@@ -21,10 +21,7 @@ class RobotNameTest(unittest.TestCase):
         self.assertEqual(robot.name, robot.name)
 
     def test_different_robots_have_different_names(self):
-        self.assertNotEqual(
-            Robot().name,
-            Robot().name
-        )
+        self.assertNotEqual(Robot().name, Robot().name)
 
     def test_reset_name(self):
         # Set a seed
@@ -46,6 +43,16 @@ class RobotNameTest(unittest.TestCase):
         self.assertNotEqual(name, name2)
         self.assertRegex(name2, self.name_re)
 
+    def test_running_out_of_names(self):
+        """Test that that we can run out of names"""
+        # Use up all the robot names
+        name_changes_left = Robot.MAX_USED_NAMES_COUNT - len(Robot.used_names)
+        for _ in range(name_changes_left):
+            Robot()
+        # Try to have one more
+        with self.assertRaises(Robot.OutOfNames):
+            Robot()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

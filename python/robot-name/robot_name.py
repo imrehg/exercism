@@ -1,29 +1,32 @@
 """A robot with a name (but not yet with a personality)"""
-from random import randrange
-from string import ascii_uppercase, digits
-
-# Keeping track of all the names so there are no duplicates
-# The format of names is AA111 (capital letters and digits).
-ROBOT_NAME_REPOSITORY = [
-    letter_1 + letter_2 + number_1 + number_2 + number_3
-    for letter_1 in ascii_uppercase
-    for letter_2 in ascii_uppercase
-    for number_1 in digits
-    for number_2 in digits
-    for number_3 in digits
-]
+import random
+import string
 
 
 class Robot:
     """A robot that has a name"""
 
-    def __init__(self, name_seed=None) -> None:
-        """Create a robot with a new name."""
+    used_names: set[str] = set()
+    MAX_USED_NAMES_COUNT = (
+        len(string.ascii_uppercase) ** 2 + len(string.digits) ** 3
+    )
+
+    class OutOfNames(Exception):
+        """In case we run out of names."""
+
+        pass
+
+    def __init__(self) -> None:
+        """Create a robot with its name
+
+        Args:
+            None
+        """
         self.reset()
 
     @property
     def name(self) -> str:
-        """Query the name of the robot.
+        """Query the name of the robot
 
         Args:
             None
@@ -34,15 +37,25 @@ class Robot:
         return self.__name
 
     def reset(self) -> None:
-        """Reset the robot name to a random value.
+        """Reset the robot name.
+        The format is AA111 (capital letters and digits).
 
         Args:
             None
 
-        Raises:
-            ValueError if robots have run out of names.
-
         Returns:
             None
         """
-        self.__name = ROBOT_NAME_REPOSITORY.pop(randrange(len(ROBOT_NAME_REPOSITORY)))
+        # Stop early if we've run out of names to use
+        if len(Robot.used_names) == Robot.MAX_USED_NAMES_COUNT:
+            raise Robot.OutOfNames
+
+        while True:
+            candidate_name = "".join(
+                random.choices(string.ascii_uppercase, k=2)
+                + random.choices(string.digits, k=3)
+            )
+            if candidate_name not in Robot.used_names:
+                Robot.used_names.add(candidate_name)
+                self.__name = candidate_name
+                break
