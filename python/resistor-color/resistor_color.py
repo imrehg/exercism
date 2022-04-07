@@ -1,22 +1,19 @@
-from collections import OrderedDict
-
-COLOR_MAPPING = OrderedDict(
-    black=0,
-    brown=1,
-    red=2,
-    orange=3,
-    yellow=4,
-    green=5,
-    blue=6,
-    violet=7,
-    grey=8,
-    white=9,
-)
-
-
 def color_code(color: str) -> int:
-    return COLOR_MAPPING[color]
+    """Find a single color's value."""
+    return colors().index(color)
 
 
 def colors() -> list[str]:
-    return list(COLOR_MAPPING.keys())
+    """List all the resistor colors in value order."""
+    return [
+        "black",
+        "brown",
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "violet",
+        "grey",
+        "white",
+    ]
