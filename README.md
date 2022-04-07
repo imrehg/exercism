@@ -3,6 +3,7 @@
 Programming submission repository for [Exercism](https://exercism.org/).
 
 [![python](https://github.com/imrehg/exercism/actions/workflows/python.yaml/badge.svg)](https://github.com/imrehg/exercism/actions/workflows/python.yaml)
+[![scala](https://github.com/imrehg/exercism/actions/workflows/scala.yaml/badge.svg)](https://github.com/imrehg/exercism/actions/workflows/scala.yaml)
 
 ## License
 

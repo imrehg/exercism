@@ -1,0 +1,27 @@
+name: scala
+
+on:
+  push:
+    paths:
+      - 'scala/**'
+      - '.github/workflows/scala.yaml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Run test all Scala submissions
+        working-directory: ./scala
+        run: |
+          bash test_all.sh
