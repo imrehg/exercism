@@ -8,25 +8,35 @@ class ComplexNumber:
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, ComplexNumber):
-            return self.real == other.real and self.imaginary == other.imaginary
+            return (
+                self.real == other.real and self.imaginary == other.imaginary
+            )
         if isinstance(other, int) or isinstance(other, float):
             return self == ComplexNumber(other, 0)
         # For any other type
         return NotImplemented
 
     def __radd__(self, other: object) -> "ComplexNumber":
-        return self.__add__(other)
+        if isinstance(other, int) or isinstance(other, float):
+            return self + ComplexNumber(other, 0)
+        # For any other type
+        return NotImplemented
 
     def __add__(self, other: object) -> "ComplexNumber":
         if isinstance(other, ComplexNumber):
-            return ComplexNumber(self.real + other.real, self.imaginary + other.imaginary)
+            return ComplexNumber(
+                self.real + other.real, self.imaginary + other.imaginary
+            )
         if isinstance(other, int) or isinstance(other, float):
             return self + ComplexNumber(other, 0)
         # For any other type
         return NotImplemented
 
     def __rmul__(self, other: object) -> "ComplexNumber":
-        return self.__mul__(other)
+        if isinstance(other, int) or isinstance(other, float):
+            return self * ComplexNumber(other, 0)
+        # For any other type
+        return NotImplemented
 
     def __mul__(self, other: object) -> "ComplexNumber":
         if isinstance(other, ComplexNumber):
@@ -47,7 +57,9 @@ class ComplexNumber:
 
     def __sub__(self, other: object) -> "ComplexNumber":
         if isinstance(other, ComplexNumber):
-            return self.__add__(-1 * other)
+            return ComplexNumber(
+                self.real - other.real, self.imaginary - other.imaginary
+            )
         if isinstance(other, int) or isinstance(other, float):
             return self - ComplexNumber(other, 0)
         # For any other type
@@ -62,10 +74,13 @@ class ComplexNumber:
     def __truediv__(self, other: object) -> "ComplexNumber":
         if isinstance(other, ComplexNumber):
             scaling = abs(other) ** 2
-            print(scaling)
-            new_real = (self.real * other.real + self.imaginary * other.imaginary) / scaling
-            new_imaginary = (self.imaginary * other.real - self.real * other.imaginary) / scaling
-            return ComplexNumber(new_real, new_imaginary)
+            divided_real = (
+                self.real * other.real + self.imaginary * other.imaginary
+            ) / scaling
+            divided_imaginary = (
+                self.imaginary * other.real - self.real * other.imaginary
+            ) / scaling
+            return ComplexNumber(divided_real, divided_imaginary)
         if isinstance(other, int) or isinstance(other, float):
             return self / ComplexNumber(other, 0)
         # For any other type
@@ -80,4 +95,6 @@ class ComplexNumber:
 
     def exp(self) -> "ComplexNumber":
         """Calculate complex exponentiation."""
-        return exp(self.real) * ComplexNumber(cos(self.imaginary), sin(self.imaginary))
+        return exp(self.real) * ComplexNumber(
+            cos(self.imaginary), sin(self.imaginary)
+        )
