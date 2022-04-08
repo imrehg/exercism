@@ -9,7 +9,7 @@ Programming submission repository for [Exercism](https://exercism.org/).
 
 For all exercism code is available at https://github.com/exercism
 and seems to be under MIT License in general, see more details at
-https://exercism.io/terms-of-service
+https://exercism.org/docs/using/legal/terms-of-service
 For all piece of their code, the respective license is applicable.
 
 Code written by me in this repository is under the MIT License
