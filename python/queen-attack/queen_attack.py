@@ -25,7 +25,7 @@ class Queen:
                 "Invalid queen position: both queens in the same square"
             )
         return (
-            row_offset == 0
-            or column_offset == 0
-            or row_offset == column_offset
+            row_offset == 0  # queens in the same row
+            or column_offset == 0  # queens in the same column
+            or row_offset == column_offset  # queens in the same diagonal
         )
