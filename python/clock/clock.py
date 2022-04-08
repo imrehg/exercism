@@ -18,4 +18,4 @@ class Clock:
         return Clock(self.hour, self.minute + minutes)
 
     def __sub__(self, minutes: int) -> "Clock":
-        return self.__add__(-minutes)
+        return Clock(self.hour, self.minute - minutes)
