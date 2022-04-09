@@ -70,6 +70,13 @@ class MarkdownTest(unittest.TestCase):
             "<h1>Header!</h1><ul><li><strong>Bold Item</strong></li><li><em>Italic Item</em></li></ul>",
         )
 
+    @unittest.expectedFailure
+    def test_with_a_little_bit_of_everything_differently(self):
+        self.assertEqual(
+            parse("## Header!\n* _Italic Item_\n* __Bold Item__"),
+            "<h2>Header!</h1><ul><li><em>Italic Item</em></li><li><strong>Bold Item</strong></li></ul>",
+        )
+
     def test_with_markdown_symbols_in_the_header_text_that_should_not_be_interpreted(
         self,
     ):
