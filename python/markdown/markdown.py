@@ -4,6 +4,14 @@ import re
 def enclose_in_tag(tag, content):
     return f"<{tag}>{content}</{tag}>"
 
+HEADER = re.compile("(?P<header>#{1,6}) (?P<title>.*)")
+BOLD = re.compile("(?P<before>.*)__(?P<content>.*)__(?P<after>.*)")
+ITALIC = re.compile("(?P<before>.*)_(?P<content>.*)_(?P<after>.*)")
+
+def convert_italic(line:str)->str:
+    if m := re.match("(?P<before>.*)_(?P<content>.*)_(?P<after>.*)", line):
+        return m.group("before") + enclose_in_tag("em", m.group("content")) + m.group("after")       
+    return line 
 
 def parse(markdown):
     lines = markdown.split("\n")
@@ -11,7 +19,7 @@ def parse(markdown):
     in_list = False
     in_list_append = False
     for i in lines:
-        if m := re.match("(?P<header>#{1,6}) (?P<title>.*)", i):
+        if m := HEADER.match(i):
             h_number = len(m.group("header"))
             i = enclose_in_tag(f"h{h_number}", m.group("title"))
         m = re.match(r"\* (.*)", i)
@@ -77,9 +85,7 @@ def parse(markdown):
         m = re.match("(.*)__(.*)__(.*)", i)
         if m:
             i = m.group(1) + "<strong>" + m.group(2) + "</strong>" + m.group(3)
-        m = re.match("(.*)_(.*)_(.*)", i)
-        if m:
-            i = m.group(1) + "<em>" + m.group(2) + "</em>" + m.group(3)
+        i = convert_italic(i)
         if in_list_append:
             i = "</ul>" + i
             in_list_append = False
