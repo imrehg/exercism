@@ -1,3 +1,9 @@
+"""Chaitana's Colossal Coaster
+
+https://exercism.org/tracks/python/exercises/chaitanas-colossal-coaster
+"""
+
+
 def add_me_to_the_queue(
     express_queue: list[str],
     normal_queue: list[str],
