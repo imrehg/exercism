@@ -11,8 +11,8 @@ def round_scores(student_scores: list[Union[float, int]]) -> list[int]:
     :param student_scores: list of student exam scores as float or int.
     :return: list of student scores *rounded* to nearest integer value.
     """
-    # With list comprehension:
-    return [round(score) for score in student_scores]
+    # With function application
+    return map(round, student_scores)
 
     # With loop:
     # results = []
