@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-find . -name *_test.py -exec python -m pytest -o markers=task {} +
+find . -name *_test.py -exec python -m pytest {} +
