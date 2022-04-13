@@ -98,16 +98,17 @@ def student_ranking(
     """
     # With list comprehension:
     return [
-        f"{index + 1}. {name}: {score}"
-        for index, (name, score) in enumerate(
-            zip(student_names, student_scores)
+        f"{rank}. {name}: {score}"
+        for rank, (name, score) in enumerate(
+            zip(student_names, student_scores), start=1
         )
     ]
 
     # With loop:
     # results = []
-    # for index, (name, score) in enumerate(zip(student_names, student_scores)):
-    #     rank = index + 1
+    # for rank, (name, score) in enumerate(
+    #     zip(student_names, student_scores), start=1
+    # ):
     #     results.append(f"{rank}. {name}: {score}")
     # return results
 
