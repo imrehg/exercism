@@ -1,95 +1,61 @@
 import re
 
+HEADER_PATTERN = re.compile("(?P<header>#{1,6}) (?P<title>.*)")
+LIST_PATTERN = re.compile(r"\* (?P<content>.*)")
+BOLD_PATTERN = re.compile("(?P<before>.*)__(?P<content>.*?)__(?P<after>.*)")
+ITALIC_PATTEN = re.compile("(?P<before>.*)_(?P<content>.*?)_(?P<after>.*)")
 
-def enclose_in_tag(tag, content):
+
+def enclose_in_tag(tag: str, content: str) -> str:
     return f"<{tag}>{content}</{tag}>"
 
-HEADER = re.compile("(?P<header>#{1,6}) (?P<title>.*)")
-BOLD = re.compile("(?P<before>.*)__(?P<content>.*)__(?P<after>.*)")
-ITALIC = re.compile("(?P<before>.*)_(?P<content>.*)_(?P<after>.*)")
 
-def convert_italic(line:str)->str:
-    if m := re.match("(?P<before>.*)_(?P<content>.*)_(?P<after>.*)", line):
-        return m.group("before") + enclose_in_tag("em", m.group("content")) + m.group("after")       
-    return line 
+def find_pattern_and_convert_all(
+    pattern: re.Pattern, tag: str, line: str
+) -> str:
+    while m := pattern.search(line):
+        line = (
+            m.group("before")
+            + enclose_in_tag(tag, m.group("content"))
+            + m.group("after")
+        )
+    return line
 
-def parse(markdown):
-    lines = markdown.split("\n")
-    res = ""
+
+def convert_bold(line: str) -> str:
+    return find_pattern_and_convert_all(BOLD_PATTERN, "strong", line)
+
+
+def convert_italic(line: str) -> str:
+    return find_pattern_and_convert_all(ITALIC_PATTEN, "em", line)
+
+
+def parse(markdown: str) -> str:
+    """Parse a markdown string according to formatting rules into HTML."""
+    html = ""
     in_list = False
-    in_list_append = False
-    for i in lines:
-        if m := HEADER.match(i):
+    lines = markdown.split("\n")
+    for line in lines:
+        transformed = False
+        if m := HEADER_PATTERN.match(line):
+            transformed = True
             h_number = len(m.group("header"))
-            i = enclose_in_tag(f"h{h_number}", m.group("title"))
-        m = re.match(r"\* (.*)", i)
-        if m:
+            line = enclose_in_tag(f"h{h_number}", m.group("title"))
+        elif m := LIST_PATTERN.match(line):
+            transformed = True
+            line = enclose_in_tag("li", m.group("content"))
             if not in_list:
                 in_list = True
-                is_bold = False
-                is_italic = False
-                curr = m.group(1)
-                m1 = re.match("(.*)__(.*)__(.*)", curr)
-                if m1:
-                    curr = (
-                        m1.group(1)
-                        + enclose_in_tag("strong", m1.group(2))
-                        + m1.group(3)
-                    )
-                    is_bold = True
-                m1 = re.match("(.*)_(.*)_(.*)", curr)
-                if m1:
-                    # This might not be tested properly
-                    curr = (
-                        m1.group(1)
-                        + enclose_in_tag("em", m1.group(2))
-                        + m1.group(3)
-                    )
-                    is_italic = True
-                i = "<ul>" + enclose_in_tag("li", curr)
-            else:
-                is_bold = False
-                is_italic = False
-                curr = m.group(1)
-                m1 = re.match("(.*)__(.*)__(.*)", curr)
-                if m1:
-                    is_bold = True
-                m1 = re.match("(.*)_(.*)_(.*)", curr)
-                if m1:
-                    is_italic = True
-                if is_bold:
-                    curr = (
-                        m1.group(1)
-                        + "<strong>"
-                        + m1.group(2)
-                        + "</strong>"
-                        + m1.group(3)
-                    )
-                if is_italic:
-                    curr = (
-                        m1.group(1)
-                        + "<em>"
-                        + m1.group(2)
-                        + "</em>"
-                        + m1.group(3)
-                    )
-                i = "<li>" + curr + "</li>"
-        else:
-            if in_list:
-                in_list_append = True
-                in_list = False
+                line = "<ul>" + line
+        elif in_list:
+            in_list = False
+            html += "</ul>"
 
-        m = re.match("<h|<ul|<p|<li", i)
-        if not m:
-            i = "<p>" + i + "</p>"
-        m = re.match("(.*)__(.*)__(.*)", i)
-        if m:
-            i = m.group(1) + "<strong>" + m.group(2) + "</strong>" + m.group(3)
-        i = convert_italic(i)
-        if in_list_append:
-            i = "</ul>" + i
-            in_list_append = False
-        res += i
+        if not transformed:
+            line = "<p>" + line + "</p>"
+        line = convert_bold(line)
+        line = convert_italic(line)
+        html += line
     if in_list:
-        res += "</ul>"
-    return res
+        html += "</ul>"
+    return html
