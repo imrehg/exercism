@@ -29,7 +29,8 @@ def count_failed_students(student_scores: list[int]) -> int:
     :param student_scores: list of integer student scores.
     :return: integer count of student scores at or below 40.
     """
-    return sum([1 for score in student_scores if score <= 40])
+    failed_counter = (1 for score in student_scores if score <= 40)
+    return sum(failed_counter)
 
     # With filter:
     # return len(list(filter(lambda score: score <= 40, student_scores)))
@@ -97,18 +98,17 @@ def student_ranking(
     """
     # With list comprehension:
     return [
-        f"{rank}. {student_name}: {score}"
-        for rank, student_name, score in zip(
-            range(1, len(student_names) + 1), student_names, student_scores
+        f"{index + 1}. {name}: {score}"
+        for index, (name, score) in enumerate(
+            zip(student_names, student_scores)
         )
     ]
 
     # With loop:
     # results = []
-    # for index, student_info in enumerate(zip(student_names, student_scores)):
+    # for index, (name, score) in enumerate(zip(student_names, student_scores)):
     #     rank = index + 1
-    #     student_name, score = student_info
-    #     results.append(f"{rank}. {student_name}: {score}")
+    #     results.append(f"{rank}. {name}: {score}")
     # return results
 
 
@@ -129,10 +129,6 @@ def perfect_score(
 
     # With generators:
     # return next(
-    #     (
-    #         [student_name, 100]
-    #         for student_name, student_score in student_info
-    #         if student_score == 100
-    #     ),
+    #     ([name, 100] for name, score in student_info if score == 100),
     #     [],
     # )
