@@ -1,18 +1,20 @@
-"""Making the Grade
-
+"""Submission for the Making the Grade exercise.
+Exercise description is found at:
 https://exercism.org/tracks/python/exercises/making-the-grade
 """
 from typing import Union
 
 
 def round_scores(student_scores: list[Union[float, int]]) -> list[int]:
-    """ "Round all provided student scores.
+    """Round all provided student scores.
 
     :param student_scores: list of student exam scores as float or int.
     :return: list of student scores *rounded* to nearest integer value.
     """
+    return [round(score) for score in student_scores]
+
     # With function application
-    return map(round, student_scores)
+    # return map(round, student_scores)
 
     # With loop:
     # results = []
@@ -27,8 +29,10 @@ def count_failed_students(student_scores: list[int]) -> int:
     :param student_scores: list of integer student scores.
     :return: integer count of student scores at or below 40.
     """
+    return sum([1 for score in student_scores if score <= 40])
+
     # With filter:
-    return len(list(filter(lambda score: score <= 40, student_scores)))
+    # return len(list(filter(lambda score: score <= 40, student_scores)))
 
     # # With loop:
     # count = 0
@@ -45,8 +49,10 @@ def above_threshold(student_scores: list[int], threshold: int) -> list[int]:
     :param threshold :  integer
     :return: list of integer scores that are at or above the "best" threshold.
     """
+    return [score for score in student_scores if score >= threshold]
+
     # With filter:
-    return list(filter(lambda score: score >= threshold, student_scores))
+    # return list(filter(lambda score: score >= threshold, student_scores))
 
     # With loop:
     # results = []
@@ -114,12 +120,19 @@ def perfect_score(
     :param student_info: list of [<student name>, <score>] lists
     :return: first `[<student name>, 100]` or `[]` if no student score of 100 is found.
     """
-    # With generators:
-    return next((student for student in student_info if student[1] == 100), [])
-
     # With loop:
-    # for student in student_info:
-    #     _, score = student
-    #     if score == 100:
-    #         return student
-    # return []
+    for student in student_info:
+        _, score = student
+        if score == 100:
+            return student
+    return []
+
+    # With generators:
+    # return next(
+    #     (
+    #         [student_name, 100]
+    #         for student_name, student_score in student_info
+    #         if student_score == 100
+    #     ),
+    #     [],
+    # )
