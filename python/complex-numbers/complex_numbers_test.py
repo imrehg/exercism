@@ -185,6 +185,13 @@ class ComplexNumbersTest(unittest.TestCase):
     def test_inequality_of_imaginary_part(self):
         self.assertNotEqual(ComplexNumber(1, 2), ComplexNumber(1, 1))
 
+    def test_unimplemented_operations_with_str(self):
+        with self.assertRaises(TypeError):
+            _ = "a" + ComplexNumber(1, 1)
+            _ = "a" - ComplexNumber(1, 1)
+            _ = "a" * ComplexNumber(1, 1)
+            _ = "a" / ComplexNumber(1, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
