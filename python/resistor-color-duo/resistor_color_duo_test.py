@@ -1,8 +1,6 @@
 import unittest
 
-from resistor_color_duo import (
-    value,
-)
+from resistor_color_duo import value
 
 # Tests adapted from `problem-specifications//canonical-data.json`
 
