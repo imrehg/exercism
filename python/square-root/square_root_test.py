@@ -27,3 +27,6 @@ class SquareRootTest(unittest.TestCase):
 
     def test_root_of_65025(self):
         self.assertEqual(square_root(65025), 255)
+
+    def test_root_of_1048576(self):
+        self.assertEqual(square_root(1048576), 1024)
