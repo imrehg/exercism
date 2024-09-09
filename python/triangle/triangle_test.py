@@ -71,6 +71,9 @@ class ScaleneTriangleTest(unittest.TestCase):
     def test_sides_may_be_floats(self):
         self.assertIs(scalene([0.5, 0.4, 0.6]), True)
 
+    def test_two_sides_not_next_to_each_other(self):
+        self.assertIs(scalene([3, 4, 3]), False)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -27,7 +27,7 @@ def scalene(sides: TriangleSides) -> bool:
     All sides are different lengths.)
     """
     a, b, c = sides
-    return is_triangle(sides) and (a != b != c)
+    return is_triangle(sides) and (a != b != c != a)
 
 
 def is_triangle(sides: TriangleSides) -> bool:
