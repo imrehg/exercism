@@ -50,7 +50,9 @@ def __exchange_with_spread(budget: float, exchange_rate: float, spread: int) -> 
     return exchange_money(budget, effective_exchange_rate)
 
 
-def exchangeable_value(budget: float, exchange_rate: float, spread: int, denomination: int) -> int:
+def exchangeable_value(
+    budget: float, exchange_rate: float, spread: int, denomination: int
+) -> int:
     """
 
     :param budget: float - the amount of your money you are planning to exchange.
@@ -59,10 +61,15 @@ def exchangeable_value(budget: float, exchange_rate: float, spread: int, denomin
     :param denomination: int - the value of a single bill.
     :return: int - maximum value you can get.
     """
-    return int((__exchange_with_spread(budget, exchange_rate, spread) // denomination) * denomination)
+    return int(
+        (__exchange_with_spread(budget, exchange_rate, spread) // denomination)
+        * denomination
+    )
 
 
-def non_exchangeable_value(budget: float, exchange_rate: float, spread: int, denomination: int) -> int:
+def non_exchangeable_value(
+    budget: float, exchange_rate: float, spread: int, denomination: int
+) -> int:
     """
 
     :param budget: float - the amount of your money you are planning to exchange.

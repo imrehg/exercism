@@ -41,4 +41,3 @@
   [[ $status -eq 0 ]]
   [[ $output == "One for John Smith, one for me." ]]
 }
-

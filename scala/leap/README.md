@@ -35,7 +35,7 @@ unit tests can be found within the exercise directory/src/test/scala.
 
 To run the tests simply run the command `sbt test` in the exercise directory.
 
-Please see the [learning](https://exercism.io/tracks/scala/learning) and 
+Please see the [learning](https://exercism.io/tracks/scala/learning) and
 [installation](https://exercism.io/tracks/scala/installation) pages if you need any help.
 
 

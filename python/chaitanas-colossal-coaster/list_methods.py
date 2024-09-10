@@ -33,9 +33,7 @@ def find_my_friend(queue: list[str], friend_name: str) -> int:
     return queue.index(friend_name)
 
 
-def add_me_with_my_friends(
-    queue: list[str], index: int, person_name: str
-) -> list[str]:
+def add_me_with_my_friends(queue: list[str], index: int, person_name: str) -> list[str]:
     """
 
     :param queue: list - names in the queue.

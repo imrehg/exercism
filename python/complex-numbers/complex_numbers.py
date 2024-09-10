@@ -16,9 +16,7 @@ def _cast_other_to_complex_number(
 ) -> Callable:
     """Convert a function's second argument to ComplexNumber if applicable."""
 
-    def wrapper_with_converted_input(
-        self: ComplexNumber, other: object
-    ) -> Any:
+    def wrapper_with_converted_input(self: ComplexNumber, other: object) -> Any:
         if isinstance(other, (int, float)):
             return function(self, ComplexNumber(other, 0))
         if isinstance(other, ComplexNumber):
@@ -46,9 +44,7 @@ class ComplexNumber:
 
     @_cast_other_to_complex_number
     def __add__(self, other: ComplexNumber) -> ComplexNumber:
-        return ComplexNumber(
-            self.real + other.real, self.imaginary + other.imaginary
-        )
+        return ComplexNumber(self.real + other.real, self.imaginary + other.imaginary)
 
     @_cast_other_to_complex_number
     def __rmul__(self, other: ComplexNumber) -> ComplexNumber:
@@ -67,9 +63,7 @@ class ComplexNumber:
 
     @_cast_other_to_complex_number
     def __sub__(self, other: ComplexNumber) -> ComplexNumber:
-        return ComplexNumber(
-            self.real - other.real, self.imaginary - other.imaginary
-        )
+        return ComplexNumber(self.real - other.real, self.imaginary - other.imaginary)
 
     @_cast_other_to_complex_number
     def __rtruediv__(self, other: ComplexNumber) -> ComplexNumber:
@@ -95,6 +89,4 @@ class ComplexNumber:
 
     def exp(self) -> ComplexNumber:
         """Calculate complex exponentiation."""
-        return exp(self.real) * ComplexNumber(
-            cos(self.imaginary), sin(self.imaginary)
-        )
+        return exp(self.real) * ComplexNumber(cos(self.imaginary), sin(self.imaginary))

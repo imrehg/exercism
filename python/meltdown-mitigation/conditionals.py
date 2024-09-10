@@ -1,10 +1,11 @@
 """ Meltdown Mitigation exercise """
 
-
 from typing import Union
 
 
-def is_criticality_balanced(temperature: Union[int, float], neutrons_emitted: Union[int, float]) -> bool:
+def is_criticality_balanced(
+    temperature: Union[int, float], neutrons_emitted: Union[int, float]
+) -> bool:
     """Verify criticality is balanced.
 
     :param temperature: temperature value in kelvin (integer or float)
@@ -16,11 +17,17 @@ def is_criticality_balanced(temperature: Union[int, float], neutrons_emitted: Un
     - The number of neutrons emitted per second is greater than 500.
     - The product of temperature and neutrons emitted per second is less than 500000.
     """
-    return temperature < 800 and neutrons_emitted > 500 and temperature * neutrons_emitted < 500000
+    return (
+        temperature < 800
+        and neutrons_emitted > 500
+        and temperature * neutrons_emitted < 500000
+    )
 
 
 def reactor_efficiency(
-    voltage: Union[int, float], current: Union[int, float], theoretical_max_power: Union[int, float]
+    voltage: Union[int, float],
+    current: Union[int, float],
+    theoretical_max_power: Union[int, float],
 ) -> str:
     """Assess reactor efficiency zone.
 
@@ -52,7 +59,9 @@ def reactor_efficiency(
 
 
 def fail_safe(
-    temperature: Union[int, float], neutrons_produced_per_second: Union[int, float], threshold: Union[int, float]
+    temperature: Union[int, float],
+    neutrons_produced_per_second: Union[int, float],
+    threshold: Union[int, float],
 ) -> str:
     """Assess and return status code for the reactor.
 

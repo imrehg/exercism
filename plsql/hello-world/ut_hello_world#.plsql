@@ -1,12 +1,12 @@
 CREATE OR REPLACE PACKAGE hello_world# IS
-   FUNCTION hello() 
+   FUNCTION hello
       RETURN varchar2;
 
 END hello_world#;
 /
 
 CREATE OR REPLACE PACKAGE BODY hello_world# IS
-   FUNCTION hello() 
+   FUNCTION hello
       RETURN varchar2
    AS
    BEGIN
@@ -35,8 +35,8 @@ IS
          dbms_output.put_line('SUCCESS: ' || i_descn);
       ELSE
          dbms_output.put_line(
-            'FAILURE: '   || i_descn || 
-            ': expected ''' || NVL('' || i_exp, 'NULL') || 
+            'FAILURE: '   || i_descn ||
+            ': expected ''' || NVL('' || i_exp, 'NULL') ||
             ''', but got '''  || NVL('' || i_act, 'null') || '''!'
          );
       END IF;

@@ -3,7 +3,11 @@
 import math
 
 """Darts circle radii and score settings"""
-DARTS_RADIUS_SCORE = [{"radius": 1, "score": 10}, {"radius": 5, "score": 5}, {"radius": 10, "score": 1}]
+DARTS_RADIUS_SCORE = [
+    {"radius": 1, "score": 10},
+    {"radius": 5, "score": 5},
+    {"radius": 10, "score": 1},
+]
 
 
 def score(x, y):

@@ -21,9 +21,7 @@ class Queen:
         row_offset = abs(self.row - another_queen.row)
         column_offset = abs(self.column - another_queen.column)
         if row_offset == column_offset == 0:
-            raise ValueError(
-                "Invalid queen position: both queens in the same square"
-            )
+            raise ValueError("Invalid queen position: both queens in the same square")
         return (
             row_offset == 0  # queens in the same row
             or column_offset == 0  # queens in the same column

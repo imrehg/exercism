@@ -37,7 +37,7 @@ Sometimes it is necessary to [raise an exception](https://docs.python.org/3/tuto
 
 This particular exercise requires that you use the [raise statement](https://docs.python.org/3/reference/simple_stmts.html#the-raise-statement) to "throw" a `ValueError` for when an account is or is not open, or the withdrawal/deposit amounts are incorrect. The tests will only pass if you both `raise` the `exception` and include a message with it.
 
-To raise a `ValueError` with a message, write the message as an argument to the `exception` type:  
+To raise a `ValueError` with a message, write the message as an argument to the `exception` type:
 
 
 ```python

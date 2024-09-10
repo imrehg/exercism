@@ -2,6 +2,7 @@
 Exercise description is found at:
 https://exercism.org/tracks/python/exercises/making-the-grade
 """
+
 from typing import Union
 
 
@@ -87,9 +88,7 @@ def letter_grades(highest: int) -> list[int]:
     # return grades_thresholds
 
 
-def student_ranking(
-    student_scores: list[int], student_names: list[str]
-) -> list[str]:
+def student_ranking(student_scores: list[int], student_names: list[str]) -> list[str]:
     """Organize the student's rank, name, and grade information in ascending order.
 
     :param student_scores: list of scores in descending order.
@@ -113,9 +112,7 @@ def student_ranking(
     # return results
 
 
-def perfect_score(
-    student_info: list[list[Union[str, int]]]
-) -> list[Union[str, int]]:
+def perfect_score(student_info: list[list[Union[str, int]]]) -> list[Union[str, int]]:
     """Create a list that contains the name and grade of the first student to make a perfect score on the exam.
 
     :param student_info: list of [<student name>, <score>] lists

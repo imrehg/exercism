@@ -18,7 +18,7 @@ RESISTOR_COLOR_MAPPING = {
 }
 
 
-def value(colors: list[str]) -> int:
+def value(colors):
     """Calculate resistor value based on the first two color bands."""
     return RESISTOR_COLOR_MAPPING[colors[0]] * 10 + RESISTOR_COLOR_MAPPING[colors[1]]
 

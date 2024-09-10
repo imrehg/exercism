@@ -1,4 +1,5 @@
 """Phone numbers parsing according to the North American Numbering Plan"""
+
 import string
 
 
@@ -33,7 +34,9 @@ def parse(phone_number: str) -> tuple[str, str, str]:
             number += char
         elif char in string.ascii_letters:
             raise ValueError("letters not permitted")
-        elif (char == "+" and index > 0) or (char not in ["+", " ", "-", "(", ")", "."]):
+        elif (char == "+" and index > 0) or (
+            char not in ["+", " ", "-", "(", ")", "."]
+        ):
             raise ValueError("punctuations not permitted")
 
     # Check formatting requirements

@@ -1,4 +1,5 @@
 """A robot with a name (but not yet with a personality)"""
+
 import random
 import string
 
@@ -7,9 +8,7 @@ class Robot:
     """A robot that has a name"""
 
     used_names: set[str] = set()
-    MAX_USED_NAMES_COUNT = (
-        len(string.ascii_uppercase) ** 2 + len(string.digits) ** 3
-    )
+    MAX_USED_NAMES_COUNT = len(string.ascii_uppercase) ** 2 + len(string.digits) ** 3
 
     class OutOfNames(Exception):
         """In case we run out of names."""

@@ -18,9 +18,9 @@ One for you, one for me.
 
 Here are some examples:
 
-|Name    |String to return 
+|Name    |String to return
 |:-------|:------------------
-|Alice   |One for Alice, one for me. 
+|Alice   |One for Alice, one for me.
 |Bob     |One for Bob, one for me.
 |        |One for you, one for me.
 |Zaphod  |One for Zaphod, one for me.
@@ -33,7 +33,7 @@ bats two_fer_test.sh
 ```
 
 After the first test(s) pass, continue by commenting out or removing the
-`[[ $BATS_RUN_SKIPPED == true ]] || skip` 
+`[[ $BATS_RUN_SKIPPED == true ]] || skip`
 annotations prepending other tests.
 
 To run all tests, including the ones with `skip` annotations, run:
@@ -53,7 +53,7 @@ external tools, such as
 [`sed`](https://www.gnu.org/software/sed/),
 [`awk`](https://www.gnu.org/software/gawk/),
 [`date`](https://www.gnu.org/software/coreutils/manual/html_node/date-invocation.html)
-and even programs written in other programming languages, 
+and even programs written in other programming languages,
 like [`Python`](https://www.python.org/).
 This track does not restrict the usage of these utilities, and as long
 as your solution is portable between systems and does not require

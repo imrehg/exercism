@@ -3,7 +3,7 @@
 set -x
 
 for dir in */;
-do 
+do
     pushd "${dir}"
     sbt test
     popd

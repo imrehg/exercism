@@ -28,7 +28,9 @@ def lose(power_pellet_active: bool, touching_ghost: bool) -> bool:
     return (not power_pellet_active) and touching_ghost
 
 
-def win(has_eaten_all_dots: bool, power_pellet_active: bool, touching_ghost: bool) -> bool:
+def win(
+    has_eaten_all_dots: bool, power_pellet_active: bool, touching_ghost: bool
+) -> bool:
     """
 
     :param has_eaten_all_dots: bool - has the player "eaten" all the dots?
