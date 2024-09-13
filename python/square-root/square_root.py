@@ -13,10 +13,10 @@ def square_root(number: int) -> int:
 
 def scalar_estimate(number: int) -> int:
     """Estimate the square root of a number using a scalar method."""
-    n = 0
+    n = 0  # the estimated exponent
     a = number
-    while a < 1 or a > 100:
+    while not (1 <= a <= 100):
         n += 1
         a //= 100
 
-    return (2 * 10**n) if a < 10 else (6 * 10**n)
+    return (2 if a < 10 else 6) * 10**n
