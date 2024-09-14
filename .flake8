@@ -4,6 +4,10 @@ extend-ignore =
     E203,
     # E501 line too long (black)
     E501
+    # D100 Missing docstring in public module
+    D100,
+    # D103 Missing docstring in public function
+    D103,
 exclude =
     # Skip the Exercism provided test files
     *_test.py
