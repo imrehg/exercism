@@ -1,4 +1,5 @@
 """Protein transcription from RNA sequences"""
+
 # from itertools import takewhile
 
 # Known protein translations

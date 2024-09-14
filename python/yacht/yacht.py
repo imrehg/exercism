@@ -1,4 +1,5 @@
 """A Yacht scoring calculator"""
+
 from collections import Counter
 
 # Score categories.

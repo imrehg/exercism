@@ -1,4 +1,5 @@
 """Space age calculation, your age on different planets"""
+
 from typing import Callable
 
 EARTH_YEAR = 31557600
