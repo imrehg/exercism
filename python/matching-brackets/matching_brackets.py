@@ -1,8 +1,20 @@
+"""Matching Brackets implementation.
+
+https://exercism.org/tracks/python/exercises/matching-brackets
+"""
+
 CLOSE_BRACKET_PAIRS = {"}": "{", "]": "[", ")": "("}
 
 
 def is_paired(input_string: str) -> bool:
-    """Matching them brackets."""
+    """Return True if brackets are correctly paired, otherwise False.
+
+    >>> is_paired("[]")
+    True
+
+    >>> is_paired("[{(")
+    False
+    """
     stack: list[str] = []
     for character in input_string:
         if character in CLOSE_BRACKET_PAIRS.values():
