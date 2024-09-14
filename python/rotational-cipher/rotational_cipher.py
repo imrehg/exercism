@@ -9,8 +9,8 @@ def rotate_char(char: str, key: int) -> str:
     """
     if not char.isalpha():
         return char
-    range_lower, range_upper = ("a", "z") if char.islower() else ("A", "Z")
-    return chr((ord(char) - ord(range_lower) + key) % (ord(range_upper) - ord(range_lower) + 1) + ord(range_lower))
+    range_start = ord("a") if char.islower() else ord("A")
+    return chr((ord(char) - range_start + key) % 26 + range_start)
 
 
 def rotate(text: str, key: int) -> str:
