@@ -4,3 +4,6 @@ extend-ignore =
     E203,
     # E501 line too long (black)
     E501
+exclude =
+    # Skip the Exercism provided test files
+    *_test.py
