@@ -8,6 +8,8 @@ extend-ignore =
     D100,
     # D103 Missing docstring in public function
     D103,
+    # D401 First line should be in imperative mood
+    D401,
 exclude =
     # Skip the Exercism provided test files
     *_test.py
