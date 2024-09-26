@@ -12,7 +12,7 @@ def rebase(input_base: int, digits: list[int], output_base: int) -> list[int]:
     # Convert to the output base
     output_digits: list[int] = []
     while True:
-        base_10_value, remainder = base_10_value // output_base, base_10_value % output_base
+        base_10_value, remainder = divmod(base_10_value, output_base)
         output_digits.insert(0, remainder)
         if base_10_value == 0:
             break
