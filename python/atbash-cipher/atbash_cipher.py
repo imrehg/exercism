@@ -1,7 +1,6 @@
 from string import ascii_lowercase
 
 encode_map = str.maketrans(ascii_lowercase, ascii_lowercase[::-1])
-decode_map = str.maketrans(ascii_lowercase[::-1], ascii_lowercase)
 
 
 def encode(plain_text: str):
@@ -13,5 +12,5 @@ def encode(plain_text: str):
 
 def decode(ciphered_text: str) -> str:
     ciphered_text = "".join(filter(str.isalnum, ciphered_text.lower()))
-    decoded_text = ciphered_text.translate(decode_map)
+    decoded_text = ciphered_text.translate(encode_map)
     return decoded_text
