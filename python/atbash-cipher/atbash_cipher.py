@@ -1,8 +1,7 @@
 from string import ascii_lowercase
 
-alphabet = ascii_lowercase
-encode_map = {ord(a): ord(r) for a, r in zip(alphabet, reversed(alphabet))}
-decode_map = {ord(r): ord(a) for a, r in zip(alphabet, reversed(alphabet))}
+encode_map = str.maketrans(ascii_lowercase, ascii_lowercase[::-1])
+decode_map = str.maketrans(ascii_lowercase[::-1], ascii_lowercase)
 
 
 def encode(plain_text: str):
