@@ -1,4 +1,4 @@
-options = ["wink", "double blink", "close your eyes", "jump"]
+options = ("wink", "double blink", "close your eyes", "jump")
 
 
 def commands(binary_str: str):
